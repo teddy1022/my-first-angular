@@ -1,0 +1,83 @@
+<form 
+  [formGroup]="registerForm"
+  action="" 
+  style="
+    margin-left: 400px;
+    margin-top: 50px;
+    background-color: white; 
+    padding: 20px; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    width: 100%; 
+    max-width: 400px;
+">
+<h2 style="margin-top: 0;">Sign up</h2>
+
+<label for="">姓名</label>
+<input formControlName="senderName" type="text" style="width: 100%; " >
+@if(registerForm.get('senderName')?.invalid && 
+(registerForm.get('senderName')?.dirty || registerForm.get('senderName')?.touched)){
+  <small style="color: red;">姓名欄位不能為空</small>
+  <br>
+}
+
+<label for="">信箱</label>
+<input formControlName="senderEmail" type="text" style="width: 100%; ">
+@if(registerForm.get('senderEmail')?.invalid && (registerForm.get('senderEmail')?.dirty || registerForm.get('senderEmail')?.touched)){
+  <small style="color: red;">
+  @if(registerForm.get('senderEmail')?.hasError('required')){
+    信箱欄位不能為空
+  }
+  @if(registerForm.get('senderEmail')?.hasError('email')){
+    信箱格式不符
+  }
+  </small>
+ <br>
+}
+
+<label for="">密碼</label>
+<input formControlName="senderPassword" type="password"  style="width: 100%; " >
+@if(registerForm.get('senderPassword')?.invalid && (registerForm.get('senderPassword')?.dirty || registerForm.get('senderPassword')?.touched)){
+  <small style="color: red;">
+  @if(registerForm.get('senderPassword')?.hasError('required')){
+    密碼欄位不能為空
+  }
+  @if(registerForm.get('senderPassword')?.hasError('minlength')){
+    密碼至少為6位
+  }
+  </small>
+ <br>
+}
+
+<label for="">確認密碼</label>
+<input formControlName="senderConfirmPassword" type="password"  style="width: 100%; ">
+@if(registerForm.get('senderConfirmPassword')?.invalid && (registerForm.get('senderConfirmPassword')?.dirty || registerForm.get('senderConfirmPassword')?.touched)){
+  <small style="color: red;">
+  @if(registerForm.get('senderConfirmPassword')?.hasError('required')){
+    確認密碼欄位不能為空
+  }
+  @if(registerForm.get('senderConfirmPassword')?.hasError('confirmPasswordMismatch')){
+    與密碼不一致
+  }
+  </small>
+ <br>
+}
+
+<button 
+[disabled]="registerForm.invalid"
+type="submit" 
+style="
+background-color: blueviolet; 
+color: white; 
+margin-top: 10px;
+margin-left: 135px;
+padding: 10px 20px; 
+border: none; 
+border-radius: 5px; 
+width: 30%; 
+font-size: 16px; 
+cursor: pointer;
+">
+Sign up
+</button>
+</form>
